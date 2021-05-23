@@ -23,7 +23,7 @@ class Random: public Base {
     }
 
     virtual void num_of_visits(Visitor* visitor, int i){
-        visitor->visit_random();
+        visitor->visit_rand();
     } 
 
 

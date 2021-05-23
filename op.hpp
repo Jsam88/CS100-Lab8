@@ -19,7 +19,19 @@ class Op : public Base {
 			std::stringstream out;
             out << num;
             return out.str();
-		}		
+		}
+
+    virtual int number_of_children(){
+        return num;
+    }
+
+    virtual Base* get_child(int i){
+        return NULL;
+    }
+
+    virtual void num_of_visits(Visitor* visitor, int i){
+        visitor->visit_op();
+    }		
 };
 
 #endif //__OP_HPP__

@@ -24,6 +24,41 @@ class Div: public Base {
                          str += Rnode->stringify();
                          return str;
 	}
-};
 
+                        virtual int number_of_children() {
+                        int counter = 0;
+                        if(Lnode != NULL){
+                                ++counter;
+                        }
+                        if(Rnode != NULL) {
+                                ++counter;
+                        }
+                        return counter;
+                }
+
+                virtual Base* get_child(int i){
+                        if(i < number_of_children()){
+                                if(i == 0){
+                                        return Lnode;
+                                }
+                                else if(i == 1){
+                                        return Rnode;
+                                }
+                        }
+                }
+
+                virtual void num_of_visits(Visitor* visitor, int i){
+                        if(i == 0){
+                                visitor->visit_div_begin();
+                        }
+
+                        if(i == 1){
+                                visitor->visit_div_middle();
+                        }
+
+                        if(i == 2){
+                                visitor->visit_div_end();
+                        }
+                }
+};
 #endif

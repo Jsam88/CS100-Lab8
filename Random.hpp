@@ -13,6 +13,22 @@ class Random: public Base {
                 virtual std::string stringify() { return std::to_string(num);}
         private:
                 double num;
+
+	virtual int number_of_children(){
+        return num;
+    }
+
+    virtual Base* get_child(int i){
+        return NULL;
+    }
+
+    virtual void num_of_visits(Visitor* visitor, int i){
+        visitor->visit_rand();
+    } 
+
+
+
+
 };
 
 

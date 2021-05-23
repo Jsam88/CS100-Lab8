@@ -62,7 +62,6 @@ class Add: public Base {
                         }
                 }
 
-
 };
 
 #endif

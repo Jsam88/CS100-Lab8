@@ -33,5 +33,4 @@ class Op : public Base {
         visitor->visit_op();
     }		
 };
-
 #endif //__OP_HPP__

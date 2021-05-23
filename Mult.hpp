@@ -61,5 +61,4 @@ class Mult: public Base {
                         }
                 }
 };
-
 #endif

@@ -30,7 +30,7 @@ class Op : public Base {
     }
 
     virtual void accept(Visitor* visitor, int i){
-        visitor->visit_op();
+        visitor->visit_op(this);
     }		
 };
 #endif //__OP_HPP__

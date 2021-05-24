@@ -5,6 +5,7 @@
 #include "base.hpp"
 #include <string>
 #include "op.hpp"
+#include "visitor.hpp"
 
 
 class Sub: public Base {
@@ -53,15 +54,15 @@ class Sub: public Base {
 
                 virtual void accept(Visitor* visitor, int i){
                         if(i == 0){
-                                visitor->visit_sub_begin();
+                                visitor->visit_sub_begin(this);
                         }
 
                         if(i == 1){
-                                visitor->visit_sub_middle();
+                                visitor->visit_sub_middle(this);
                         }
 
                         if(i == 2){
-                                visitor->visit_sub_end();
+                                visitor->visit_sub_end(this);
                         }
                 }
      

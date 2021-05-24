@@ -6,6 +6,8 @@
 #include <string>
 #include <cmath>
 #include "op.hpp"
+#include "visitor.hpp"
+
 
 class Pow: public Base {
 
@@ -53,15 +55,15 @@ class Pow: public Base {
 
                 virtual void accept(Visitor* visitor, int i){
                         if(i == 0){
-                                visitor->visit_pow_begin();
+                                visitor->visit_pow_begin(this);
                         }
 
                         if(i == 1){
-                                visitor->visit_pow_middle();
+                                visitor->visit_pow_middle(this);
                         }
 
                         if(i == 2){
-                                visitor->visit_pow_end();
+                                visitor->visit_pow_end(this);
                         }
                 }
 

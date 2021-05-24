@@ -5,10 +5,11 @@
 #include "base.hpp"
 #include "op.hpp"
 #include <string>
+#include "visitor.hpp"
 
-class Random: public Base {
+class Rand: public Base {
         public:
-                Random() { num = rand() % 100; }
+                Rand() { num = rand() % 100; }
                 virtual double evaluate() { return num; }
                 virtual std::string stringify() { return std::to_string(num);}
         private:
@@ -23,7 +24,7 @@ class Random: public Base {
     }
 
     virtual void accept(Visitor* visitor, int i){
-        visitor->visit_rand();
+        visitor->visit_rand(this);
     } 
 
 

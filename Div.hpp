@@ -49,15 +49,15 @@ class Div: public Base {
 
                 virtual void accept(Visitor* visitor, int i){
                         if(i == 0){
-                                visitor->visit_div_begin();
+                                visitor->visit_div_begin(this);
                         }
 
                         if(i == 1){
-                                visitor->visit_div_middle();
+                                visitor->visit_div_middle(this);
                         }
 
                         if(i == 2){
-                                visitor->visit_div_end();
+                                visitor->visit_div_end(this);
                         }
                 }
 };

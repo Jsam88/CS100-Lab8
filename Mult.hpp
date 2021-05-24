@@ -5,6 +5,7 @@
 #include "base.hpp"
 #include "op.hpp"
 #include <string>
+#include "visitor.hpp"
 
 class Mult: public Base {
 	 private:
@@ -49,15 +50,15 @@ class Mult: public Base {
 
                 virtual void accept(Visitor* visitor, int i){
                         if(i == 0){
-                                visitor->visit_mult_begin();
+                                visitor->visit_mult_begin(this);
                         }
 
                         if(i == 1){
-                                visitor->visit_mult_middle();
+                                visitor->visit_mult_middle(this);
                         }
 
                         if(i == 2){
-                                visitor->visit_mult_end();
+                                visitor->visit_mult_end(this);
                         }
                 }
 };

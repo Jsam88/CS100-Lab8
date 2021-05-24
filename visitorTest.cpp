@@ -20,7 +20,7 @@ TEST(LatexTest, testADD){
 	Iterator* num = new Iterator(add);
     	VisitorLaTeX* form = new VisitorLaTeX();
 	for(num; !num->is_done(); num->next()){
-		num->current_node()->accept((form,num->current_index());
+		num->current_node()->accept(form,num->current_index());
 	}
 	EXPECT_EQ(form->getString(), "${({5} + {4})}$");
 }
@@ -32,7 +32,7 @@ TEST(LatexTest, testSub){
         Iterator* num = new Iterator(sub);
         VisitorLaTeX* form = new VisitorLaTeX();
         for(num; !num->is_done(); num->next()){
-                num->current_node()->accept((form,num->current_index());
+                num->current_node()->accept(form,num->current_index());
         }
         EXPECT_EQ(form->getString(), "${({5} - {4})}$");
 }
@@ -44,7 +44,7 @@ TEST(LatexTest, testDiv){
         Iterator* num = new Iterator(div);
         VisitorLaTeX* form = new VisitorLaTeX();
         for(num; !num->is_done(); num->next()){
-                num->current_node()->accept((form,num->current_index());
+                num->current_node()->accept(form,num->current_index());
         }
         EXPECT_EQ(form->getString(), "${\\frac{8}{4}}$");
 }
@@ -56,7 +56,7 @@ TEST(LatexTest, testMult){
         Iterator* num = new Iterator(mult);
         VisitorLaTeX* form = new VisitorLaTeX();
         for(num; !num->is_done(); num->next()){
-                num->current_node()->accept((form,num->current_index());
+                num->current_node()->accept(form,num->current_index());
         }
         EXPECT_EQ(form->getString(), "${({4}\\cdot{2})}$");
 }
@@ -69,7 +69,7 @@ TEST(LatexTest, testPow){
         Iterator* num = new Iterator(pow);
         VisitorLaTeX* form = new VisitorLaTeX();
         for(num; !num->is_done(); num->next()){
-                num->current_node()->accept((form,num->current_index());
+                num->current_node()->accept(form,num->current_index());
         }
         EXPECT_EQ(form->getString(), "${({6}^{2})}$");
 }
@@ -79,20 +79,20 @@ TEST(LatexTest, testALL){
     	Base* val2 = new Op(2);
     	Base* val3 = new Op(3);
 
-        Add* addition = new Add(divide, power);
+        Add* addition = new Add(val3, val2);
     	Sub* subtract = new Sub(val2, val1);
     	Mult* multiply = new Mult(val3, val2);
-    	Div* divide = new Div(multiply, subtract);
+    	Div* divide = new Div(val3, val2);
     	Pow* power = new Pow(val2, val3);
     	      
         Iterator* it = new Iterator(addition);
 
-        VisitorLaTeX* v = new VisitorLaTeX();
+        VisitorLaTeX* form = new VisitorLaTeX;
         for(it; !it->is_done(); it->next()){
-                it->current_node()->accept((v,it->current_index()));
+                it->current_node()->accept(form, it->current_index());
         }
 
-        EXPECT_EQ(v->getString(), "${({\\frac{({3}\\cdot{2})}{({2}-{4})}}+{({2}^{3})})}$");
+        EXPECT_EQ(form->getString(), "${({\\frac{({3}\\cdot{2})}{({2}-{4})}}+{({2}^{3})})}$");
 }
 
 

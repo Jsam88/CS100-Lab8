@@ -20,7 +20,7 @@ void VisitorLaTeX::visit_op(Op* node){
     str += "{" + node->stringify() + "}";
 }
 
-void VisitorLaTeX::visit_rand(Random* node){
+void VisitorLaTeX::visit_rand(Rand* node){
     str += "{" + node->stringify() + "}";
 }
 

@@ -85,17 +85,15 @@ TEST(LatexTest, testALL){
     	Div* divide = new Div(val3, val2);
     	Pow* power = new Pow(val2, val3);
     	      
-        Iterator* it = new Iterator(addition);
+        Iterator* num = new Iterator(addition);
 
         VisitorLaTeX* form = new VisitorLaTeX();
-        for(it; !it->is_done(); it->next()){
-                it->current_node()->accept(form, it->current_index());
+        for(num; !num->is_done(); num->next()){
+                num->current_node()->accept(form, num->current_index());
         }
 
         EXPECT_EQ(form->getString(), "${({\\frac{({3}\\cdot{2})}{({2}-{4})}}+{({2}^{3})})}$");
 }
-
-
 
 TEST(MethodAddTest, checkAdd){
 	Base* val1 = new Op(2);
@@ -120,7 +118,6 @@ TEST(MethodSubTest, checkSub){
         EXPECT_EQ(sub->stringify(), "(5 - 1)");
         EXPECT_EQ(sub->evaluate(), 4);
 }
-
 TEST(MethodDivTest, checkDiv){
         Base* val1 = new Op(10);
         Base* val2 = new Op(5);

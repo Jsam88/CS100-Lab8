@@ -48,7 +48,7 @@ class VisitorLaTeX : public Visitor {
 
 	std::string getString();
         virtual void visit_op(Op* node);
-        virtual void visit_rand(Random* node);
+        virtual void visit_rand(Rand* node);
         virtual void visit_add_begin(Add* node) = 0;
         virtual void visit_add_middle(Add* node) = 0;
         virtual void visit_add_end(Add* node) = 0;

@@ -1,6 +1,17 @@
 #include "gtest/gtest.h"
 #include <string>
 
+#include "iterator.hpp"
+#include "visitor.hpp"
+#include "Add.hpp"
+#include "base.hpp"
+#include "Div.hpp"
+#include "Mult.hpp"
+#include "op.hpp"
+#include "Pow.hpp"
+#include "Sub.hpp"
+#include "Random.hpp"
+
 
 TEST(LatexTest, testADD){
 	Base* val1 = new Op(5);
@@ -9,7 +20,7 @@ TEST(LatexTest, testADD){
 	Iterator* num = new Iterator(add);
     	VisitorLaTeX* form = new VisitorLaTeX();
 	for(num; !num->is_done(); num->next()){
-		num->current_node()->accept(form,num->current_index());
+		num->current_node()->accept((form,num->current_index());
 	}
 	EXPECT_EQ(form->getString(), "${({5} + {4})}$");
 }
@@ -21,7 +32,7 @@ TEST(LatexTest, testSub){
         Iterator* num = new Iterator(sub);
         VisitorLaTeX* form = new VisitorLaTeX();
         for(num; !num->is_done(); num->next()){
-                num->current_node()->accept(form,num->current_index());
+                num->current_node()->accept((form,num->current_index());
         }
         EXPECT_EQ(form->getString(), "${({5} - {4})}$");
 }
@@ -33,7 +44,7 @@ TEST(LatexTest, testDiv){
         Iterator* num = new Iterator(div);
         VisitorLaTeX* form = new VisitorLaTeX();
         for(num; !num->is_done(); num->next()){
-                num->current_node()->accept(form,num->current_index());
+                num->current_node()->accept((form,num->current_index());
         }
         EXPECT_EQ(form->getString(), "${\\frac{8}{4}}$");
 }
@@ -45,7 +56,7 @@ TEST(LatexTest, testMult){
         Iterator* num = new Iterator(mult);
         VisitorLaTeX* form = new VisitorLaTeX();
         for(num; !num->is_done(); num->next()){
-                num->current_node()->accept(form,num->current_index());
+                num->current_node()->accept((form,num->current_index());
         }
         EXPECT_EQ(form->getString(), "${({4}\\cdot{2})}$");
 }
@@ -58,7 +69,7 @@ TEST(LatexTest, testPow){
         Iterator* num = new Iterator(pow);
         VisitorLaTeX* form = new VisitorLaTeX();
         for(num; !num->is_done(); num->next()){
-                num->current_node()->accept(form,num->current_index());
+                num->current_node()->accept((form,num->current_index());
         }
         EXPECT_EQ(form->getString(), "${({6}^{2})}$");
 }
@@ -68,17 +79,17 @@ TEST(LatexTest, testALL){
     	Base* val2 = new Op(2);
     	Base* val3 = new Op(3);
 
-        ADD* addition = new ADD(divide, power);
+        Add* addition = new Add(divide, power);
     	Sub* subtract = new Sub(val2, val1);
     	Mult* multiply = new Mult(val3, val2);
     	Div* divide = new Div(multiply, subtract);
     	Pow* power = new Pow(val2, val3);
     	      
-        Iterator* it = new Iterator(add);
+        Iterator* it = new Iterator(addition);
 
         VisitorLaTeX* v = new VisitorLaTeX();
         for(it; !it->is_done(); it->next()){
-                it->current_node()->accept(v,it->current_index());
+                it->current_node()->accept((v,it->current_index()));
         }
 
         EXPECT_EQ(v->getString(), "${({\\frac{({3}\\cdot{2})}{({2}-{4})}}+{({2}^{3})})}$");
@@ -89,7 +100,7 @@ TEST(LatexTest, testALL){
 TEST(MethodAddTest, checkAdd){
 	Base* val1 = new Op(2);
 	Base* val2 = new Op(4);
-	Base* add = new ADD(val1, val2);
+	Base* add = new Add(val1, val2);
 
 	EXPECT_EQ(add->number_of_children(), 2);
 	EXPECT_EQ(add->get_child(0), val1);
@@ -101,7 +112,7 @@ TEST(MethodAddTest, checkAdd){
 TEST(MethodSubTest, checkSub){
         Base* val1 = new Op(5);
         Base* val2 = new Op(1);
-        Base* sub = new SUB(val1, val2);
+        Base* sub = new Sub(val1, val2);
 
         EXPECT_EQ(sub->number_of_children(), 2);
         EXPECT_EQ(sub->get_child(0), val1);
@@ -140,7 +151,7 @@ TEST(MethodMultTest, checkMult){
 TEST(MethodPowTest, checkPow){
         Base* val1 = new Op(4);
         Base* val2 = new Op(2);
-        Base* pow = new POW(val1, val2);
+        Base* pow = new Pow(val1, val2);
 
         EXPECT_EQ(pow->number_of_children(), 2);
         EXPECT_EQ(pow->get_child(0), val1);
@@ -170,7 +181,7 @@ TEST(IteratorTest, iteratorCheck){
         EXPECT_EQ(val->current_index(), 6);
         EXPECT_EQ(val->is_done(), false);
 
-	it->next();
+	val->next();
         EXPECT_EQ(val->current_node(), num2);
         EXPECT_EQ(val->current_index(), 0);
         EXPECT_EQ(val->is_done(), false);
@@ -181,7 +192,7 @@ TEST(IteratorTest, iteratorCheck){
         EXPECT_EQ(val->current_index(), 4);
 
 	val->next();
-	EXPECT_EQ(it->is_done(), true);
+	EXPECT_EQ(val->is_done(), true);
 }
 
 TEST(IteratorTest, stringTest){
@@ -195,7 +206,7 @@ TEST(IteratorTest, stringTest){
         Base* div = new Div(add, mult);
 
 	std::string string = "";
-	Iterator* it = new Iterator(div);
+	Iterator* val = new Iterator(div);
 
 	for(val; !val->is_done(); val->next()){
 		string = val->current_node()->stringify();
@@ -233,7 +244,7 @@ TEST(ExpressionTree, fullTest){
         Base* div = new Div(add, mult);
 
         EXPECT_EQ(div->number_of_children(), 2);
-        EXPECT_EQ(div->get_child(0), ass);
+        EXPECT_EQ(div->get_child(0), add);
         EXPECT_EQ(div->get_child(1), mult);
         EXPECT_EQ(div->stringify(), "((5 + 1) / ((2 - 1) * (1 ** 2)))");
         EXPECT_EQ(div->evaluate(), 6);

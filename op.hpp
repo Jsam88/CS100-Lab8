@@ -29,7 +29,7 @@ class Op : public Base {
         return NULL;
     }
 
-    virtual void num_of_visits(Visitor* visitor, int i){
+    virtual void accept(Visitor* visitor, int i){
         visitor->visit_op();
     }		
 };

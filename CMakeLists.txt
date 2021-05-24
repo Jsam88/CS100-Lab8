@@ -5,13 +5,16 @@ ADD_SUBDIRECTORY(googletest)
 
 SET(CMAKE_CXX_STANDARD 11)
 
-ADD_EXECUTABLE(main
-    main.cpp
-)
-
 ADD_EXECUTABLE(test
    visitorTest.cpp
+   iterator.cpp
+   visitor.cpp
 )
 
+ADD_EXECUTABLE(main
+	main.cpp
+	iterator.cpp
+	visitor.cpp
+)
 TARGET_LINK_LIBRARIES(test gtest)
 TARGET_COMPILE_DEFINITIONS(test PRIVATE gtest_disable_pthreads=ON)

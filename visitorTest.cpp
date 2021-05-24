@@ -19,9 +19,9 @@ TEST(LatexTest, testADD){
 	Add* add = new Add(val1, val2);
 	Iterator* num = new Iterator(add);
     	VisitorLaTeX* form = new VisitorLaTeX();
-	for(num; !num->is_done(); num->next()){
-		num->current_node()->accept(form,num->current_index());
-	}
+//	for(num; !num->is_done(); num->next()){
+//		num->current_node()->accept(form,num->current_index());
+//	}
 	EXPECT_EQ(form->getString(), "${({5} + {4})}$");
 }
 
@@ -87,7 +87,7 @@ TEST(LatexTest, testALL){
     	      
         Iterator* it = new Iterator(addition);
 
-        VisitorLaTeX* form = new VisitorLaTeX;
+        VisitorLaTeX* form = new VisitorLaTeX();
         for(it; !it->is_done(); it->next()){
                 it->current_node()->accept(form, it->current_index());
         }

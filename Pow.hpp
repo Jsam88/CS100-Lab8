@@ -51,7 +51,7 @@ class Pow: public Base {
                         }
                 }
 
-                virtual void num_of_visits(Visitor* visitor, int i){
+                virtual void accept(Visitor* visitor, int i){
                         if(i == 0){
                                 visitor->visit_pow_begin();
                         }
